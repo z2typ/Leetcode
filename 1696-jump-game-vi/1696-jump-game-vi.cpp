@@ -7,7 +7,7 @@ public:
         priority_queue<pair<int,int>> pq;
         int max_val = nums[0];
         pq.push({nums[0],0});
-        // int max_idx = 0;
+        
         for(int i=1;i<=min(k,n-1);i++){
             nums[i] += max_val;
              pq.push({nums[i],i});
