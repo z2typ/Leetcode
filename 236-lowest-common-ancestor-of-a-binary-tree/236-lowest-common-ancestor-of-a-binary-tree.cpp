@@ -28,9 +28,6 @@ public:
             ans = root;
         }
         
-        if(root->val==p->val || root->val==q->val){
-            return true;
-        }
 
         return current||right_st||left_st;
         
