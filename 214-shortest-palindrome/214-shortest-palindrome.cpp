@@ -26,10 +26,6 @@ public:
             }
         }
         
-        for(int x:LPS){
-            cout<<x<<" ";
-        }
-        cout<<endl;
         
         return rev.substr(0, n - LPS[n_new - 1]) + s;
         
