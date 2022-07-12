@@ -23,7 +23,6 @@ public:
         int lacc = -1;
         while(l<=r){
             int mid = (l+r)/2;
-            cout<<mid<<endl;
             if(nums[mid]==target){
                 if( mid+1<nums.size() && nums[mid]==nums[mid+1]){
                     l = mid+1;
