@@ -9,27 +9,33 @@
  */
 class Solution {
 public:
-    bool util(TreeNode* root,TreeNode* p, TreeNode* q, TreeNode* &ans){
-        bool current = false, left_st = false, right_st = false;
+    bool found1 = false;
+    bool found2 = false;
+    void util(TreeNode* root,TreeNode* p, TreeNode* q, TreeNode* &ans,TreeNode* parent = NULL){
         
-        if(root==NULL){
-            return false;
-        }
         
-        if(root == p || root == q){
-            current = true;
-        }
         
-        left_st = util(root->left, p,q,ans);
-        
-        right_st = util(root->right ,p,q,ans);
-                
-        if(ans==NULL && ((left_st&&current)||(current&&right_st)||(left_st&&right_st) ) ){
-            ans = root;
-        }
-        
+        if(root==p || root==q){
+            if(found1 == false){
+                ans = root;
+                found1=true;
+            }else{
+                found2 = true;
+            }
 
-        return current||right_st||left_st;
+        }
+        
+        if(root->left!=NULL)
+        util(root->left,  p, q, ans, root);
+        if(root->right!=NULL)
+        util(root->right, p, q, ans, root);
+        
+        if(found1==true && found2!=true && ans==root){
+            ans=parent;
+        }
+        
+        
+        
         
     }
     
