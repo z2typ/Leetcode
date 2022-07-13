@@ -11,14 +11,19 @@
  */
 class Solution {
 public:
-int minDepth(TreeNode* root) {
-if(root==NULL) return 0;
-if(root->left==NULL && root->right==NULL)
-return 1;
-int left=INT_MAX;
-if(root->left) left=minDepth(root->left);
-int right=INT_MAX;
-if(root->right) right= minDepth(root->right);
-return 1+min(left,right);
-}
+    int minDepth(TreeNode* root,int depth=0) {
+        if(root==NULL) return depth;
+        if(root->left==NULL && root->right==NULL){
+            return depth+1;
+        }
+        
+        if(root->left==NULL){
+            return minDepth(root->right,depth+1);
+        }else if(root->right==NULL){
+            return minDepth(root->left,depth+1);
+        }
+        
+        return min(minDepth(root->right,depth+1),minDepth(root->left,depth+1));
+        
+    }
 };
