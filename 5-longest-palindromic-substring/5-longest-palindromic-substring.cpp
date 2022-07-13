@@ -13,7 +13,7 @@ public:
                 if(s[i]==s[j]){
                     if(i==j||i-j==1||dp[i-1][j+1]){
                         dp[i][j] =true;
-                        if(i-j+1 > len){
+                        if(i-j+1 >= len){
                             left_idx = j;
                             len = (i-j+1);
                         }
