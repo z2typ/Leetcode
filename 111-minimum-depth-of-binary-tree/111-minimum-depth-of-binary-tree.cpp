@@ -12,7 +12,8 @@
 class Solution {
 public:
     int minDepth(TreeNode* root,int depth=0) {
-        if(root==NULL) return depth;
+        if(root==NULL) return 0;
+        
         if(root->left==NULL && root->right==NULL){
             return depth+1;
         }
