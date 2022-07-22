@@ -13,46 +13,36 @@ public:
     ListNode* partition(ListNode* head, int x) {
         if(head==NULL) return NULL;
         
-        ListNode* i  = NULL;
-        ListNode* j  = NULL;
+        ListNode* i  = new ListNode();
+        ListNode* j  = new ListNode();
         
         ListNode* temp = head;
         
-        ListNode* i_ptr = NULL;
+        ListNode* i_ptr = i;
         while(temp!=NULL){
             if(temp->val < x){
-                if(i==NULL){
-                    i = new ListNode(temp->val);
-                    i_ptr = i;
-                }else{
                     i_ptr->next = new ListNode(temp->val);
                     i_ptr = i_ptr->next;
-                }
             }
             
             temp = temp->next;
         }
         
         temp = head;
-        ListNode* j_ptr = NULL;
+        ListNode* j_ptr = j;
         
         while(temp!=NULL){
             if(temp->val >= x){
-                if(j==NULL){
-                    j = new ListNode(temp->val);
-                    j_ptr = j;
-                }else{
                     j_ptr->next = new ListNode(temp->val);
                     j_ptr = j_ptr->next;
-                }
             }
             
             temp = temp->next;
         }
-        if(i_ptr==NULL) return j;
-        i_ptr->next = j;
         
-        return i;
+        i_ptr->next = j->next;
+        
+        return i->next;
         
     }
 };
