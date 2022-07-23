@@ -1,8 +1,5 @@
 class Solution {
 public:
-    // void merge_sort(vector<int>& nums,int i,int j);
-    // void merge(vector<int>& nums, int i,int mid,int j);
-    
     vector<int> sortArray(vector<int>& nums) {
         int n = nums.size();
         merge_sort(nums,0,n-1);
@@ -28,27 +25,20 @@ public:
         int p2 = mid+1;
         int pArr = 0;
         
-        while(p1<=mid && p2<=j){
-            if(nums[p1]<nums[p2]){
+        while(pArr<n){
+            if(p1<=mid && p2<=j && nums[p1]<nums[p2]){
                 arr[pArr] = nums[p1];
                 pArr++;
                 p1++;
+            }else if(p2<=j){
+                arr[pArr] = nums[p2];
+                pArr++;
+                p2++;
             }else{
-                arr[pArr] = nums[p2];
-                pArr++;
-                p2++;
-            }
-        }
-        
-        while(p1<=mid){
                 arr[pArr] = nums[p1];
                 pArr++;
                 p1++;
-        }
-        while(p2<=j){
-                arr[pArr] = nums[p2];
-                pArr++;
-                p2++;
+            }
         }
         
         for(int k=i;k<=j;k++){
