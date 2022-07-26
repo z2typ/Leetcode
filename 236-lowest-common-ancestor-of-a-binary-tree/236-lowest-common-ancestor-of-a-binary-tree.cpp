@@ -11,40 +11,34 @@ class Solution {
 public:
     bool found1 = false;
     bool found2 = false;
-    void util(TreeNode* root,TreeNode* p, TreeNode* q, TreeNode* &ans,TreeNode* parent = NULL){
+    TreeNode* LCA = NULL;
+    
+    void helper(TreeNode* root, TreeNode* p, TreeNode* q,TreeNode* parent){
+        if(root==NULL){
+            return;
+        }
         
-        
-        
-        if(root==p || root==q){
-            if(found1 == false){
-                ans = root;
-                found1=true;
-            }else{
+        if(root==p||root==q){
+            if(found1==false){
+                found1 = true;
+                LCA = root;
+            }
+            else{
                 found2 = true;
             }
-
         }
         
-        if(root->left!=NULL)
-        util(root->left,  p, q, ans, root);
-        if(root->right!=NULL)
-        util(root->right, p, q, ans, root);
+        helper(root->left,p,q,root);
         
-        if(found1==true && found2!=true && ans==root){
-            ans=parent;
+        helper(root->right,p,q,root);
+        
+        if(root==LCA && found2==false){
+            LCA = parent;
         }
-        
-        
-        
-        
     }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        
-        TreeNode* ans=NULL;
-        
-        util(root,p,q,ans);
-        
-        return ans;
+        helper(root,p,q,NULL);
+        return LCA;
     }
 };
