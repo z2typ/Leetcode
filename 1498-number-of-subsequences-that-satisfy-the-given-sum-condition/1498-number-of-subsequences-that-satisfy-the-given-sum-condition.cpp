@@ -1,24 +1,23 @@
 #define MOD 1'000'000'007
-#define ll long long
 class Solution {
 public:
     int add(int a, int b){
         return ((a%MOD)+(b%MOD))%MOD;
     }
-    int mul(ll a,ll b){
+    int mul(long long a,long long b){
         return ((a%MOD)*(b%MOD))%MOD;
     }
     
-    ll power(int x,int y){
+    int power(int x,int y){
         x = (x%MOD);
         if(y==0){
             return 1;
         }
         if(y%2==0){
-            ll p = power(x,y/2)%MOD;
+            int p = power(x,y/2);
             return mul(p,p);
         }else{
-            ll p = power(x,y/2)%MOD;
+            int p = power(x,y/2);
             return mul(mul(p,p),x);
         }
     }
