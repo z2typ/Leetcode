@@ -11,7 +11,7 @@ public:
         for(int i=0;i<n;i++){
             max_profit = max(max_profit,p[i]-prices[i]);
         }
-        if(max_profit<0) return 0;
+        // if(max_profit<0) return 0;
         return max_profit;
         
     }
