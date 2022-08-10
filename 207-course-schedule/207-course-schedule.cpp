@@ -34,7 +34,6 @@ public:
         
         for(int i=0;i<numCourses;i++){
             if(!visited[i]){
-                uset.clear();
                 if(hasCycle(graph,visited,i)){
                     return false;
                 }
