@@ -3,35 +3,23 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         
         int n = intervals.size();
-        vector<vector<int>> ans;
-        int idx = -1;
+        
+        vector<vector<int>> res;
+        
         for(int i=0;i<n;i++){
-            if(intervals[i][0]>newInterval[0]){
-                idx = i;
-                break;
-            }
-        }
-        
-        if(idx!=-1){
-            intervals.insert(intervals.begin()+idx,newInterval);
-        }else{
-            intervals.push_back(newInterval);
-        }
-        
-        n = intervals.size();
-        vector<int> merged_interval = intervals[0];
-        for(int i=1;i<n;i++){
-            if(merged_interval[1]>=intervals[i][0]){
-                merged_interval[1] = max(merged_interval[1],intervals[i][1]);
+            if(newInterval[1]<intervals[i][0]){
+                res.push_back(newInterval);
+                res.insert(res.end(),intervals.begin()+i,intervals.end());
+                return res;
+            }else if(newInterval[0]>intervals[i][1]){
+                res.push_back(intervals[i]);
             }else{
-                ans.push_back(merged_interval);
-                merged_interval = intervals[i];
+                newInterval = {min(newInterval[0],intervals[i][0]),max(newInterval[1],intervals[i][1])};
             }
+            
         }
-        ans.push_back(merged_interval);
-        return ans;
-        
-        
+        res.push_back(newInterval);
+        return res;
         
     }
 };
