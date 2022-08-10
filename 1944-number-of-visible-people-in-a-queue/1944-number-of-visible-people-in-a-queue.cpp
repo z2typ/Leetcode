@@ -17,12 +17,7 @@ public:
             if(st.empty()){
                 res[i] = count;
             }else{
-                if(st.top().first == heights[i]){
-                    res[i] = count+1;
-                    st.pop();
-                }else{
-                    res[i] = count+1;
-                }
+                res[i] = count+1;
             }
             
             st.push({heights[i],i});
