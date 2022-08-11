@@ -12,20 +12,23 @@
 class Solution {
 public:
     int count = 0;
-    void util(TreeNode* root,int prevMax=INT_MIN){
+    int util(TreeNode* root,int prevMax=INT_MIN){
+        int a=0,b=0;
         if(root->left){
-            util(root->left, max(prevMax, root->val));
+            a = util(root->left, max(prevMax, root->val));
         }
-        if(root->val >= prevMax){
-            count++;
-        }
+
         if(root->right){
-            util(root->right, max(prevMax, root->val));
+            b = util(root->right, max(prevMax, root->val));
         }
+        
+        if(root->val >= prevMax){
+            return a+b+1;
+        }
+        return a+b;
     }
     
     int goodNodes(TreeNode* root) {
-        util(root);
-        return count;
+        return util(root);
     }
 };
