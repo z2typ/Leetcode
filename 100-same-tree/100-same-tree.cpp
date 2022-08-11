@@ -23,17 +23,10 @@ public:
             isSame = false;
         }
         
-        if(p->left==NULL && q->left!=NULL || p->left!=NULL && q->left==NULL ){
-            isSame = false;
-        }else{
-            util(p->left,q->left);
-        }
-        
-        if(p->right==NULL && q->right!=NULL || p->right!=NULL && q->right==NULL ){
-            isSame = false;
-        }else{
-            util(p->right,q->right);
-        }
+            
+        util(p->left,q->left);    
+        util(p->right,q->right);
+
         
         
     }
