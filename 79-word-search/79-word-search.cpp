@@ -12,7 +12,7 @@ public:
     int X[4] = {1,-1,0,0};
     int Y[4] = {0,0,-1,1};
     void dfs(vector<vector<char>>& board, string &word,int k,int x,int y){
-        if(k+1==word.size()){
+        if(k==word.size()){
             ans = true;
             return;
         }
@@ -20,7 +20,7 @@ public:
         visited[x][y] = true;
 
         for(int i=0;i<4;i++){
-            if(isSafe(board,word[k+1],x+X[i],y+Y[i])){
+            if(isSafe(board,word[k],x+X[i],y+Y[i])){
                 dfs(board,word,k+1,x+X[i],y+Y[i]);
             }
         }
@@ -37,7 +37,7 @@ public:
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(isSafe(board,word[0],i,j)){
-                    dfs(board,word,0,i,j);
+                    dfs(board,word,1,i,j);
                 }
             }
         }
