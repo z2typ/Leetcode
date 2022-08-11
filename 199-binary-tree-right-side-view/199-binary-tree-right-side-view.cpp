@@ -19,12 +19,9 @@ public:
             rightView.push_back(root->val);
             max_level = level;
         }
-        if(root->right){
-            rightSide(root->right,level+1);
-        }
-        if(root->left){
-            rightSide(root->left,level+1);
-        }
+        
+        rightSide(root->right,level+1);
+        rightSide(root->left,level+1);
     }
     vector<int> rightSideView(TreeNode* root) {
         rightSide(root);
