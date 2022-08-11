@@ -11,8 +11,8 @@ public:
         
     }
     int makeConnected(int n, vector<vector<int>>& connections) {
-        int conn = connections.size();
-        if(conn < (n-1)){
+        int edges = connections.size();
+        if(edges < (n-1)){
             return -1;
         }
         
@@ -32,9 +32,6 @@ public:
         }
         
         return count-1;
-        
-        
-        
         
     }
 };
