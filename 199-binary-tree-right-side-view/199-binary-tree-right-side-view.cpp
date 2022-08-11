@@ -11,22 +11,23 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root,vector<int> &ans,int len, int &longest_len){
-        if(root==NULL){
-            return;
+    int max_level = -1;
+    vector<int> rightView;
+    void rightSide(TreeNode* root,int level = 0){
+        if(root==NULL)return;
+        if(level>max_level){
+            rightView.push_back(root->val);
+            max_level = level;
         }
-        if(longest_len<len){
-            longest_len = len;
-            ans.push_back(root->val);
+        if(root->right){
+            rightSide(root->right,level+1);
         }
-        dfs(root->right,ans,len+1,longest_len);
-        dfs(root->left,ans,len+1,longest_len);
-        
+        if(root->left){
+            rightSide(root->left,level+1);
+        }
     }
     vector<int> rightSideView(TreeNode* root) {
-        int length = -1;
-        vector<int> ans;
-        dfs(root,ans,0,length);
-        return ans;
+        rightSide(root);
+        return rightView;
     }
 };
