@@ -7,10 +7,15 @@ public:
         dist[k-1] = 0;
         
         for(int i=0;i<n-1;i++){
+            int flag = 1;
             for(vector<int> edge : times){
                 if(dist[edge[0]-1]!=INF){
                     dist[edge[1]-1] = min(dist[edge[1]-1],dist[edge[0]-1]+edge[2]);
+                    flag = 0;
                 }
+            }
+            if(flag){
+                break;
             }
         }
         
