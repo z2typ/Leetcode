@@ -7,10 +7,12 @@ public:
         for(int time : times){
             if(umap.count(60-time%60)){
                 count += umap[60-time%60];
-            }else if(time%60==0){
-                count += umap[0];
             }
-            umap[time%60]++;
+            if(time%60 !=0){
+                umap[time%60]++;
+            }else{
+                umap[time%60+60]++;
+            }
         }
         
         return count;
