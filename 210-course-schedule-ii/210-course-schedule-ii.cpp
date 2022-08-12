@@ -2,13 +2,13 @@ class Solution {
 public:
     vector<int> topoSort;
     unordered_set<int> uset;
-    int flag = 0;
+    int hasCycle = 0;
     void dfs(vector<vector<int>> &graph, int node,vector<int> & visited){
         visited[node] = 1;
         uset.insert(node);
         for(int adj_node : graph[node]){
             if(uset.count(adj_node)){
-                flag = 1;
+                hasCycle = 1;
             }
             if(!visited[adj_node]){
                 dfs(graph,adj_node,visited);
@@ -30,7 +30,7 @@ public:
             if(!visited[i])
                 dfs(graph,i,visited);
         }
-        if(flag){
+        if(hasCycle){
             topoSort.clear();
         }
         return topoSort;
