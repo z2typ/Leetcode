@@ -11,7 +11,7 @@ public:
             
             max_ct = max(max_ct,umap[s[r]]);
             
-            if(r-l+1-max_ct > k){
+            while(r-l+1-max_ct > k){
                 umap[s[l]]--;
                 l++;
             }
