@@ -7,11 +7,11 @@ public:
         visited[node] = 1;
         uset.insert(node);
         for(int adj_node : graph[node]){
-            if(uset.count(adj_node)){
-                hasCycle = 1;
-            }
+            
             if(!visited[adj_node]){
                 dfs(graph,adj_node,visited);
+            }else if(uset.count(adj_node)){
+                hasCycle = 1;
             }
         }
         topoSort.push_back(node);
