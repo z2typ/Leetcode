@@ -9,9 +9,9 @@ public:
         for(r=0;r<n;r++){
             umap[s[r]]++;
             
-            max_ct = max_element(umap.begin(),umap.end(),[](pair<char,int> a,pair<char,int> b){return a.second < b.second;})->second;
+            max_ct = max(max_ct,umap[s[r]]);
             
-            while(r-l+1-max_ct > k){
+            if(r-l+1-max_ct > k){
                 umap[s[l]]--;
                 l++;
             }
