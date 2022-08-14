@@ -10,7 +10,7 @@ public:
     }
     string minWindow(string s, string t) {
         int n = s.size();
-        int l = 0;
+        int l = -1;
         
         unordered_map<char,int> umap_s, umap_t;
         
@@ -28,17 +28,16 @@ public:
             }
             
             while(valid(umap_s,umap_t)){
-                umap_s[s[l]]--;
                 l++;
+                umap_s[s[l]]--;
             }
-            if(windowSize >(r-l+1+1)){
-                windowSize = (r-l+1+1);
-                Left = l-1;
+            if(windowSize >(r-l+1)){
+                windowSize = (r-l+1);
+                Left = l;
                 Right = r;
             }
             
         }
-        // cout<<Left<<" "<<Right<<endl;
         
         return s.substr(Left,Right-Left+1);
 
