@@ -6,15 +6,13 @@ public:
             ans.push_back(s);
             return;
         }
-        // if(closed>open){
-        //     return;
-        // }
         
-        if(open==closed){
+        if(open==closed && open < n){
             paren(n,open+1,closed,s+"(");
         }else if(open>closed){
-            if(open<n)
-            paren(n,open+1,closed,s+"(");
+            if(open<n){
+                paren(n,open+1,closed,s+"(");
+            }
             paren(n,open,closed+1,s+")");
         }
         
