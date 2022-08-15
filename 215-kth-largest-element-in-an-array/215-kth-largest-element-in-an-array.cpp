@@ -1,7 +1,9 @@
 class Solution {
 public:
     int partition(vector<int>& nums,int l,int r){
-        int pivot = l;
+        int pivot = l + (rand())%(r-l+1);
+        swap(nums[pivot],nums[l]);
+        pivot = l;
         int i = l+1;
         for(int j=l+1;j<=r;j++){
             if(nums[j]<nums[pivot]){
