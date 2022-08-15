@@ -8,17 +8,15 @@ public:
 
         if(target==0){
             result.push_back(curr);
-            return;
-        }else if(n==0){
-            return;
-        }
-        if(arr[n-1]<=target){
-            curr.push_back(arr[n-1]);
-            helper(arr,n,target-arr[n-1]);
-            curr.pop_back();
-            helper(arr,n-1,target);
-        }else{
-            helper(arr,n-1,target);
+        }else if(n!=0){
+            if(arr[n-1]<=target){
+                curr.push_back(arr[n-1]);
+                helper(arr,n,target-arr[n-1]);
+                curr.pop_back();
+                helper(arr,n-1,target);
+            }else{
+                helper(arr,n-1,target);
+            }
         }
         
     }
