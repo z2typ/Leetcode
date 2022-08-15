@@ -6,9 +6,9 @@ public:
             res.push_back(ans);
             return;
         }
-        for(int i=s+1;i<=n;i++){
+        for(int i=s;i<=n;i++){
             ans.push_back(i);
-            backtrack(i,n,k,ans);
+            backtrack(i+1,n,k,ans);
             ans.pop_back();
         }
         
@@ -16,7 +16,7 @@ public:
     
     vector<vector<int>> combine(int n, int k) {
         vector<int> ans;
-        backtrack(0,n,k,ans);
+        backtrack(1,n,k,ans);
         return res;
     }
 };
