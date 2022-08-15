@@ -13,7 +13,7 @@ public:
     int X[4] = {0,0,-1,1};
     int Y[4] = {-1,1,0,0};
     
-    inline int add(long long a,long long b){
+    int add(long long a,long long b){
         return ((a%MOD)+(b%MOD))%MOD;
     }
     
@@ -22,19 +22,13 @@ public:
         if(visited[x][y]){
             return visited[x][y];
         }
-        int paths = 0;
         
+        int paths = 0;
         for(int i=0;i<4;i++){                
             if(isSafe(matrix, x+X[i], y+Y[i], matrix[x][y])){
                 paths = add(paths,dfs(matrix,x+X[i],y+Y[i])+1);
-                
             }
         }
-        
-        // if(paths==0){
-        //     paths = 1;
-        // }
-        
         return visited[x][y] = paths;
         
     }
