@@ -14,8 +14,9 @@ public:
         
         for(int i=1;i<26;i++){
             empty_slots -= min(max_ct-1,count[i]);
+            empty_slots = max(0,empty_slots);
         }
         
-        return empty_slots > 0 ? empty_slots + tasks.size() : tasks.size(); 
+        return empty_slots + tasks.size(); 
     }
 };
