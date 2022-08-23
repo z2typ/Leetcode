@@ -28,7 +28,6 @@ class Solution
                 for(int i=min_val;i<min_val+groupSize;i++){
                     if(umap.count(i)){
                         umap[i]--;
-                        if(umap[i]<0) return false;
                         if(umap[i]==0){
                             if(pq.top() == i){
                                 pq.pop();
