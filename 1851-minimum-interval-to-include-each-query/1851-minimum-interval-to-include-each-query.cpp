@@ -1,5 +1,4 @@
 struct Interval{
-    
     int length;
     int left;
     int right;
@@ -25,11 +24,20 @@ struct Interval{
     }
     
 };
+
+
 class Solution {
 public:
     vector<int> minInterval(vector<vector<int>>& intervals, vector<int>& queries) {
-        // auto pq_comp = [](Interval &a, Interval &b){return b<a;};
-        priority_queue<Interval, vector<Interval>, greater<Interval> > pq;
+        struct mygreater{
+            bool operator ()(Interval &a, Interval &b){
+                if(a.length!=b.length){
+                    return a.length > b.length;
+                }
+                return a.right > b.right;
+            }
+        };
+        priority_queue<Interval, vector<Interval>, mygreater > pq;
         unordered_map<int, vector<int>> index;
         for(int i=0;i<queries.size();i++){
             index[queries[i]].push_back(i);
