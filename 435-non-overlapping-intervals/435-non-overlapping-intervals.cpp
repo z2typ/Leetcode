@@ -7,16 +7,14 @@ public:
         int r = 1;
         
         int count = 0;
-        for(int i=1;i<n;i++){
+        for(int r=1;r<n;r++){
             if(intervals[r][0] < intervals[l][1]){
                 if(intervals[l][1] > intervals[r][1]){
                     l = r;
                 }
-                r++;
                 count++;
             }else{
                 l = r;
-                r++;
             }
         }
         return count;
