@@ -7,13 +7,13 @@ public:
             return r;
         }
         while(l<r){
-            long int mid = l + (r-l)/2;
+            long int mid = ceil(l + 1.0*(r-l)/2);
             if (mid*mid > x) {
-                r = mid;
+                r = mid - 1;
             }else{
-                l = mid + 1;
+                l = mid;
             }
         }
-        return l-1;
+        return l;
     }
 };
