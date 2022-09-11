@@ -1,41 +1,45 @@
 class Solution {
 public:
+    template<class T>
+    void erase(unordered_map<T,int> &umap,T ch){
+        if(umap[ch]==1){
+            umap.erase(ch);
+        }else{
+            umap[ch]--;
+        }
+    }
+    
     bool checkInclusion(string s1, string s2) {
-        int s1_size = s1.size();
-        
-        if(s2.size()<s1_size){
+        int n1 = s1.size(), n2 = s2.size();
+        if(n1>n2){
             return false;
         }
-        
-        int l = 0, r = s1_size - 1;
-        
-        unordered_map<char,int> s1_map, s2_map;
+        int l = 0;
+        unordered_map<char,int> umap1;
         
         for(char ch : s1){
-            s1_map[ch]++;
+            umap1[ch] += 1;
         }
         
-        for(int i=0; i<s1_size; i++){
-            s2_map[s2[i]]++;
+        unordered_map<char,int> umap2;
+        for(int r = 0; r < n1; r++){
+            umap2[s2[r]]++;
         }
         
-        while(true){
-            if(s1_map==s2_map){
+        if(umap2 == umap1){
+            return true;
+        }
+        
+        int r = n1;
+        while(r < n2){
+            umap2[s2[r]]++;
+            erase(umap2,s2[l]);
+            r++;
+            l++;
+            if(umap2 == umap1){
                 return true;
             }
-
-            if(s2_map[s2[l]]==1){
-                s2_map.erase(s2[l]);
-            }else{
-                s2_map[s2[l]]--;
-            }
-            l++;
-            r++;
-            if(r>=s2.size()) break;
-            s2_map[s2[r]]++;
-            
         }
         return false;
-        
     }
 };
