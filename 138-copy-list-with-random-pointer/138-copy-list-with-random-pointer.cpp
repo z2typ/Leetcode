@@ -17,42 +17,46 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if(head==NULL) return NULL;
-        Node* temp = head->next;
-        Node* copyList = new Node(head->val);
-        Node* temp2 = copyList;
-        unordered_map<Node*,int> index;
-        index[head] = 0;
-        int i = 1;
+        
+        unordered_map<Node*, int> index; // pointer : index (original list)
+        unordered_map<int, Node*> addrs; // index : pointer (copy list)
+        
+        Node* copy_list = new Node(0);
+        Node* temp = head;
+        Node* copy_temp = copy_list;
+        
+        int i = 0;
         while(temp){
-            temp2->next = new Node(temp->val);
             index[temp] = i;
+            copy_temp->next = new Node(temp->val);
             temp = temp->next;
-            i++;
-            temp2 = temp2->next;
-        }
-        
-        
-        
-        unordered_map<int,Node*> ptr;
-        temp2 = copyList;
-        i=0;
-        while(temp2){
-            ptr[i] = temp2;
-            temp2 = temp2->next;
+            copy_temp = copy_temp->next;
             i++;
         }
         
-        temp2 = copyList;
+        copy_list = copy_list->next; // needs to be deleted
+        
+        copy_temp = copy_list;
+        
+        i = 0;
+        while(copy_temp){
+            addrs[i] = copy_temp;
+            copy_temp = copy_temp->next;
+            i++;
+        }
+        
         temp = head;
-        while(temp2){
-            if(temp->random != NULL)
-            temp2->random = ptr[index[temp->random]];
-            temp2 =temp2->next;
+        copy_temp = copy_list;
+        
+        while(temp){
+            if(temp->random){
+                copy_temp->random = addrs[index[temp->random]];
+            }
             temp = temp->next;
+            copy_temp = copy_temp->next;
         }
         
-        return copyList;
+        return copy_list;
         
     }
 };
