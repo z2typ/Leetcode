@@ -1,23 +1,28 @@
 class Solution {
 public:
+    int next(int n){
+        int digit = 0;
+        int next_number = 0;
+        while(n){
+            digit = n%10;
+            n = n/10;
+            next_number += digit*digit;
+        }
+        return next_number;
+    }
+    
     bool isHappy(int n) {
-        unordered_set<int> set;
-        
-        set.insert(n);
-        while(n!=1){
-            
-            int n_squared = 0;
-            
-            while(n!=0){
-                n_squared += (n%10)*(n%10);
-                n = (n/10);
-            }
-            
-            n = n_squared;
-            if(set.count(n)){
+        if(n==1 || next(n)==1){
+            return true;
+        }
+        int slow = n;
+        int fast = next(n);
+        while(fast!=1 && next(fast)!=1){
+            if(slow==fast){
                 return false;
             }
-            set.insert(n);
+            slow = next(slow);
+            fast = next(next(fast));
         }
         return true;
     }
