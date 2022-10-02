@@ -1,23 +1,27 @@
 class Solution {
 public:
+    int highestFreq(unordered_map<char, int> &freq){
+        int highestFreq = 0;
+        for(auto it : freq){
+            highestFreq = max(highestFreq, it.second);
+        }
+        return highestFreq;
+    }
     int characterReplacement(string s, int k) {
-        int l=0, r=0;
-        int n = s.size();
-        unordered_map<char,int> umap;
-        int max_ct = 0;
-        int max_length = 0;
-        for(r=0;r<n;r++){
-            umap[s[r]]++;
+        int n = s.length();
+        int l=0;
+        int maxLength = 0;
+        unordered_map<char, int> freq;
+        for(int r=0; r<n; r++){
+            freq[s[r]] += 1;
             
-            max_ct = max(max_ct,umap[s[r]]);
-            
-            while(r-l+1-max_ct > k){
-                umap[s[l]]--;
+            while(r-l+1-highestFreq(freq) > k){
+                freq[s[l]] -= 1;
                 l++;
             }
-            max_length = max(max_length,r-l+1);
+            
+            maxLength = max(r-l+1,maxLength);
         }
-        
-        return max_length;
+        return maxLength;
     }
 };
