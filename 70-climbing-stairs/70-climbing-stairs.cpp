@@ -1,18 +1,18 @@
 class Solution {
 public:
+    vector<int> dp;
+    int distinctWays(int n){
+        if(n==0 || n==1){
+            return 1;
+        }
+        if(dp[n]!=-1){
+            return dp[n];
+        }
+        return dp[n] = distinctWays(n-1) + distinctWays(n-2);   
+    }
     
     int climbStairs(int n) {
-        vector<int> dp(n+1);
-        int a = 1;
-        int b = 1;
-        int ans = 1;
-        for(int i=2;i<=n;i++){
-            ans  = a + b;
-            a = b;
-            b = ans;
-        }
-        
-        return ans;
-        
+        dp = vector<int>(n+1,-1);
+        return distinctWays(n);
     }
 };
