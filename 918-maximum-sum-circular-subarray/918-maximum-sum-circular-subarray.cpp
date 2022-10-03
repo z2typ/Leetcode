@@ -26,7 +26,9 @@ public:
             }
             
         }
-        int ms = sum - minSum != 0 ? sum - minSum : maxSum;
-        return max(maxSum, ms);
+        if(sum == minSum){ 
+            return maxSum;
+        }
+        return max(maxSum, sum - minSum);
     }
 };
