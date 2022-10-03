@@ -1,45 +1,39 @@
 class Solution {
 public:
-    bool valid(unordered_map<char,int> &a,unordered_map<char,int> &b){
-        for(auto it=b.begin();it!=b.end();it++){
-            if(a[it->first] < it->second){
-                return false;
+    
+    bool isValidWindow(unordered_map<char, int> &freq_t, unordered_map<char, int> &freq_s){
+        bool isValid = true;
+        for(auto it : freq_t){
+            if(freq_s[it.first] < it.second){
+                isValid = false;
             }
         }
-        return true;
+        return isValid;
     }
+    
     string minWindow(string s, string t) {
-        int n = s.size();
-        int l = -1;
+        int n = s.length();
         
-        unordered_map<char,int> umap_s, umap_t;
-        
+        unordered_map<char, int> freq_t, freq_s;
         for(char ch : t){
-            umap_t[ch]++;
+            freq_t[ch] += 1;
         }
-        int Left = 0;
-        int Right = -1;
-        int windowSize = INT_MAX;
-        for(int r=0;r<n;r++){
-            umap_s[s[r]]++;
+        int l=0;
+        int minWindowLength = INT_MAX;
+        int start_idx = n;
+        for(int r=0; r<n; r++){
             
-            if(!valid(umap_s, umap_t)){
-                continue;
-            }
+            freq_s[s[r]] += 1;
             
-            while(valid(umap_s,umap_t)){
-                l++;
-                umap_s[s[l]]--;
+            while(isValidWindow(freq_t, freq_s)){
+                if(r-l+1 < minWindowLength){
+                    minWindowLength = r-l+1;
+                    start_idx = l;
+                }
+                freq_s[s[l]] -= 1;
+                l += 1;
             }
-            if(windowSize >(r-l+1)){
-                windowSize = (r-l+1);
-                Left = l;
-                Right = r;
-            }
-            
         }
-        
-        return s.substr(Left,Right-Left+1);
-
+        return s.substr(start_idx,minWindowLength);
     }
 };
