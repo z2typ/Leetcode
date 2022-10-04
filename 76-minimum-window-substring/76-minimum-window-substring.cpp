@@ -1,14 +1,8 @@
 class Solution {
 public:
     
-    bool isValidWindow(unordered_map<char, int> &freq_t, unordered_map<char, int> &freq_s){
-        bool isValid = true;
-        for(auto it : freq_t){
-            if(freq_s[it.first] < it.second){
-                isValid = false;
-            }
-        }
-        return isValid;
+    bool isValidWindow(int count){
+        return count==0;
     }
     
     string minWindow(string s, string t) {
@@ -30,7 +24,7 @@ public:
                 count -= 1;
             }
             
-            while(count==0){
+            while(isValidWindow(count)){
                 if(r-l+1 < minWindowLength){
                     minWindowLength = r-l+1;
                     start_idx = l;
