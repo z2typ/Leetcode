@@ -1,9 +1,7 @@
 class Solution {
 public:
     
-    bool isValidWindow(int count){
-        return count==0;
-    }
+
     
     string minWindow(string s, string t) {
         int n = s.length();
@@ -24,7 +22,7 @@ public:
                 count -= 1;
             }
             
-            while(isValidWindow(count)){
+            while(count==0){ // count == 0 represents a valid window
                 if(r-l+1 < minWindowLength){
                     minWindowLength = r-l+1;
                     start_idx = l;
