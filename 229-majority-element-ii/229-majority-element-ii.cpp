@@ -2,42 +2,42 @@ class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
         int n = nums.size();
-        int ans1, ans2;
-        int cnt1 = 0, cnt2 = 0;
-        
-        for(int i=0;i<n;i++){
-            if(ans1==nums[i]){
-                cnt1++;
-            }else if(ans2==nums[i]){
-                cnt2++;
-            }else if(cnt1==0){
-                ans1 = nums[i];
-                cnt1 = 1;
-            }else if(cnt2==0){
-                ans2 = nums[i];
-                cnt2 = 1;
+        int num1;
+        int count1 = 0;
+        int num2;
+        int count2 = 0;
+        for(int x : nums){
+            if(num1==x){
+                count1++;
+            }else if(num2==x){
+                count2++;
+            }else if(count1==0){
+                num1 = x;
+                count1 = 1;
+            }else if(count2==0){
+                num2 = x;
+                count2 = 1;
             }else{
-                cnt1--;
-                cnt2--;
+                count1--;
+                count2--;
             }
         }
-        cnt1 = 0;
-        cnt2 = 0;
-        for(int i=0;i<n;i++){
-            if(ans1==nums[i]){
-                cnt1++;
-            }else if(ans2==nums[i]){
-                cnt2++;
+        int c1 = 0, c2 = 0;
+        for(int x : nums){
+            if(x==num1){
+                c1++;
+            }else if(x==num2){
+                c2++;
             }
         }
-        vector<int> a;
-        if(cnt1>(n/3)){
-            a.push_back(ans1);
+        vector<int> res;
+        if(c1>n/3){
+            res.push_back(num1);
         }
-        if(cnt2>(n/3)){
-            a.push_back(ans2);
+        if(c2>n/3){
+            res.push_back(num2);
         }
-        return a;
         
+        return res;
     }
 };
