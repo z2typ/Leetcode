@@ -10,7 +10,7 @@ public:
                 ct += 1;
             }else{
                 ct--;
-                if(ct==-1){
+                if(ct==0){
                     ct=1;
                     x = nums[i];
                 }
