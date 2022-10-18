@@ -5,27 +5,30 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-      long long util(int coins[], long long n, long long amount,vector<vector<long long>> &t){
-        if(t[n][amount] != -1) return t[n][amount];
-        if(amount==0){
-            return t[n][amount] = 1;
-        }else if(n==0){
-            return t[n][amount] = 0;
-        }
-        
-        if(coins[n-1]>amount){
-            return t[n][amount] = util(coins,n-1,amount,t);
-        }else{
-            return t[n][amount] = util(coins,n,amount-coins[n-1],t)+util(coins,n-1,amount,t);
-        }
-    }
-    long long int count(int S[], int n, int m) {
+
+    long long int count(int coins[], int n, int m) {
         long long amount = m;
-        vector<vector<long long>> t(n+1,vector<long long>(amount+1,-1));
-        long long ans = util(S,n,amount,t);
-        // if(ans>=100000000) return -1;
-        return ans;
+        vector<vector<long long>> t(n+1,vector<long long>(amount+1));
+
+        // initialiazing the array
+        for(int i=0;i<=n;i++){
+            t[i][0]=1;
+        }
+
+        // applying tabulation approach
+        for(int i=1; i<=n; i++){
+            for(int j=1; j<=amount; j++){
+                if(S[i-1]>amount){
+                    return t[i][j] = t[i-1][j];
+                }else{
+                    return t[i][j] = t[i][j-S[i-1]] + t[n-1][j];
+                }
+            }
+        }
+
+        return t[n][amount];
     }
+
 };
 
 // { Driver Code Starts.
