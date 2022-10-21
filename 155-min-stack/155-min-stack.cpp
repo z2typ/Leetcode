@@ -3,7 +3,8 @@ public:
     stack<int> mainSt;
     stack<int> minSt;
     MinStack() {
-        
+        mainSt = stack<int>();
+        minSt = stack<int>():
     }
     
     void push(int val) {
